@@ -63,7 +63,7 @@ Copy the IDs printed into `wrangler.jsonc`.
 
 ### 3. Deploy
 ```bash
-cd wallet-pass-worker
+cd receiptpass-main
 wrangler deploy
 ```
 Your API + UI are now live at `https://wallet-receipt-pass-api.YOUR_SUBDOMAIN.workers.dev`
