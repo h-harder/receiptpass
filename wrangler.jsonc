@@ -1,0 +1,50 @@
+{
+  // Wallet Receipt Pass API — Cloudflare Worker
+  "name": "wallet-receipt-pass-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+
+  // ── Static frontend served from /public ──────────────────────────────────
+  "assets": {
+    "directory": "./public/",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+
+  // ── KV Namespaces ────────────────────────────────────────────────────────
+  // Create with:
+  //   wrangler kv namespace create PASS_KEYS
+  //   wrangler kv namespace create RATE_LIMIT
+  "kv_namespaces": [
+    {
+      "binding": "PASS_KEYS",
+      "id": "REPLACE_WITH_YOUR_PASS_KEYS_KV_ID",
+      "preview_id": "REPLACE_WITH_YOUR_PASS_KEYS_PREVIEW_KV_ID"
+    },
+    {
+      "binding": "RATE_LIMIT",
+      "id": "REPLACE_WITH_YOUR_RATE_LIMIT_KV_ID",
+      "preview_id": "REPLACE_WITH_YOUR_RATE_LIMIT_PREVIEW_KV_ID"
+    }
+  ],
+
+  // ── Non-secret environment variables ────────────────────────────────────
+  "vars": {
+    "MAX_BULK_PASSES": "50"
+  }
+
+  // ── Secrets (set via: wrangler secret put <NAME>) ────────────────────────
+  // APPLE_PASS_TYPE_IDENTIFIER  — e.g. "pass.com.yourcompany.receipt"
+  // APPLE_TEAM_IDENTIFIER       — 10-char Apple Team ID from developer.apple.com
+  // APPLE_CERT_P12_B64          — Base64 of your Pass Type Certificate .p12
+  // APPLE_CERT_PASSWORD         — Password for the .p12 file
+  // APPLE_WWDR_CERT_B64         — Base64 of Apple WWDR G4 intermediate cert
+  // GOOGLE_ISSUER_ID            — From Google Pay & Wallet Console
+  // GOOGLE_SERVICE_ACCOUNT_EMAIL
+  // GOOGLE_SERVICE_ACCOUNT_KEY  — PEM private key from service account JSON
+}
